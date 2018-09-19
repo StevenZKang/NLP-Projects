@@ -11,11 +11,20 @@ lem = WordNetLemmatizer()
 from nltk.stem.porter import PorterStemmer
 stem = PorterStemmer()
 
-from nltk.tokenize import sent_tokenize, word_tokenize
-sample_text = "Welcome to Toronto, this is Canada's greatest city!"
-print(word_tokenize(sample_text))
-
 word = "multiplying"
 print(lem.lemmatize(word,"v"))
 
 print(stem.stem(word))
+
+#Tokenizer
+from nltk.tokenize import sent_tokenize, word_tokenize
+sample_text = "Welcome to Toronto, this is Canada's greatest city!"
+sample_tokens = word_tokenize(sample_text)
+
+#Stopwords
+from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))
+
+filtered_sentence = [x for x in sample_tokens if x not in stop_words]
+print(filtered_sentence)
+
