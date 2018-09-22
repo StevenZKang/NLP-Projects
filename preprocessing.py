@@ -28,3 +28,5 @@ stop_words = set(stopwords.words('english'))
 filtered_sentence = [x for x in sample_tokens if x not in stop_words]
 print(filtered_sentence)
 
+tagged = nltk.pos_tag(sample_tokens)
+print(tagged)
