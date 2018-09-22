@@ -1,5 +1,6 @@
 import nltk
 
+
 from nltk.corpus import state_union
 from nltk.tokenize import PunktSentenceTokenizer
 
@@ -20,9 +21,14 @@ def tag_text(token_text: list) -> list:
 def chunk_text(tagged_text: tuple):
     "Takes a list of tagged tuples and returns a noun chunk"
     chunkGram = r"""Chunk: {<RB.?>*<VB?>*<NNP>+<NN>?}"""
-    chunkParser = nltk.RegexpParser(chunkGram)
-    chunked = chunkParser.parse(tagged_text)
+    chunkParser = nltk.RegexpParser(chunkGram)  #Setup Custom ChunkParser with ChunkGram specs
+    chunked = chunkParser.parse(tagged_text)    #Chunk parse each list of tuples into an NLTK tree
     return chunked
+
+def name_entities(tagged_text: tuple, detail: bool):
+    ""
+    namedEnt = nltk.ne_chunk(tagged_text, detail)
+    return namedEnt
 
 training_text = state_union.raw("2005-GWBush.txt")
 sample_text = state_union.raw("2006-GWBush.txt")
@@ -34,8 +40,12 @@ tokenized_text = custom_sent_tokenizer.tokenize(sample_text)
 
 tagged_text = tag_text(tokenized_text)
 print(tagged_text)
+
+
 chunked_text = chunk_text(tagged_text[0])
 chunked_text.draw()
+namedEnt_text = name_entities(tagged_text[0], False)
+namedEnt_text.draw()
 
 
 
