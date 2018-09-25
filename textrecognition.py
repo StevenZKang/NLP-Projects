@@ -13,7 +13,6 @@ def tag_text(token_text: list) -> list:
             tagged = nltk.pos_tag(words) #Tag the individual word depending on part of speech
             final_list.append(tagged) #Append the list of tuples to final list
 
-
         except Exception as e:
             print(str(e))
     return final_list

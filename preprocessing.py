@@ -12,7 +12,7 @@ from nltk.stem.porter import PorterStemmer
 stem = PorterStemmer()
 
 word = "multiplying"
-print(lem.lemmatize(word,"v"))
+print(lem.lemmatize(word,"v")) #"v" for verb, default is noun
 
 print(stem.stem(word))
 
