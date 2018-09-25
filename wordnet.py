@@ -25,3 +25,4 @@ word1 = wordnet.synset("cat.n.01")
 word2 = wordnet.synset("dog.n.01")
 relation_value = (word1.wup_similarity(word2))
 print(relation_value)
+
