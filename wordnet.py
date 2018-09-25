@@ -16,3 +16,12 @@ for synset in bad_set:
 
 #Set removes the repeated synonym lemmas
 print(set(bad_synonyms))
+
+####################################################
+#Wu and Palmer Semantic Related-Ness
+
+#Synset takes input in the form of word.type.#
+word1 = wordnet.synset("cat.n.01")
+word2 = wordnet.synset("dog.n.01")
+relation_value = (word1.wup_similarity(word2))
+print(relation_value)
