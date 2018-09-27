@@ -25,7 +25,7 @@ def chunk_text(tagged_text: tuple):
     return chunked
 
 def name_entities(tagged_text: tuple, detail: bool):
-    ""
+    "Name known entities in tagged text"
     namedEnt = nltk.ne_chunk(tagged_text, detail)
     return namedEnt
 
