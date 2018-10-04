@@ -25,5 +25,7 @@ def find_features(reviews: list):
     ""
     words = set(reviews)
     features = {}
+    for w in word_features:
+        features[w] = (w in words)
 
     return features
