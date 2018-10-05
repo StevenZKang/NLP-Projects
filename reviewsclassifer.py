@@ -22,10 +22,10 @@ all_words = nltk.FreqDist(all_words)
 #Distribution of 3000 most common words in reviews
 word_features = list(all_words.keys())[:3000]
 
-def find_features(reviews: list)->dict:
+def find_features(review: list)->dict:
     """Takes one review and searches for the 3000 words in word features,
     returning a dictionary marking whether they are present or not"""
-    words = set(reviews)
+    words = set(review)
     features = {}
     for w in word_features:
         features[w] = (w in words)
@@ -34,6 +34,19 @@ def find_features(reviews: list)->dict:
 
 feature_presence = find_features(movie_reviews.words('neg/cv000_29416.txt'))
 
-featuresets = [(find_features(rev), category) for (rev, category) in reviews]
+#(rev,category) = (review, pos/neg)
+#Creates a list of tuples where the first element is a dict of the presence of the words
+#and the second element is pos/neg.
+feature_sets = [(find_features(review), category) for (review, category) in reviews]
 
-print(featuresets)
+#Split Training and Testing Data
+training_set = feature_sets[:1900]
+testing_set = feature_sets[1900:]
+
+#Declare classifier algorithm
+classifier = nltk.NaiveBayesClassifier.train(training_set)
+
+#Nltk.classify.accuracy takes in a testing set and runs in through the given classifier to determine accuracy.
+print("Accuracy Percentage:", (nltk.classify.accuracy(classifier,testing_set))*100)
+
+classifier.show_most_informative_features(15)
