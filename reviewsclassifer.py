@@ -1,5 +1,6 @@
 import nltk
 import random
+import pickle
 
 from nltk.corpus import movie_reviews
 
@@ -45,6 +46,11 @@ testing_set = feature_sets[1900:]
 
 #Declare classifier algorithm
 classifier = nltk.NaiveBayesClassifier.train(training_set)
+
+#Save the classifier into file.
+save_classifier = open("naivebayes.pickle","wb")
+pickle.dump(classifier, save_classifier)
+save_classifier.close()
 
 #Nltk.classify.accuracy takes in a testing set and runs in through the given classifier to determine accuracy.
 print("Accuracy Percentage:", (nltk.classify.accuracy(classifier,testing_set))*100)
