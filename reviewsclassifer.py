@@ -53,6 +53,7 @@ pickle.dump(classifier, save_classifier)
 save_classifier.close()
 
 #Nltk.classify.accuracy takes in a testing set and runs in through the given classifier to determine accuracy.
+print("Stage One Results");
 print("Accuracy Percentage:", (nltk.classify.accuracy(classifier,testing_set))*100)
 
-classifier.show_most_informative_features(15)
+classifier.show_most_informative_features(10)
