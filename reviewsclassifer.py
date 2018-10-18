@@ -35,6 +35,14 @@ def find_features(review: list)->dict:
 
 feature_presence = find_features(movie_reviews.words('neg/cv000_29416.txt'))
 
+def open_classifer():
+    #Open the saved byte file with the saved classifer and load it into classifier
+    classifier_r = open("naivebayes,pickle", "rb")
+    classifier = pickle.load(classifier_r)
+    #Close the byte file
+    classifier_r.close()
+    return classifier
+
 #(rev,category) = (review, pos/neg)
 #Creates a list of tuples where the first element is a dict of the presence of the words
 #and the second element is pos/neg.
