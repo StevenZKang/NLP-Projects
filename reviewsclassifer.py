@@ -1,8 +1,6 @@
 import nltk
 import random
 import pickle
-import preprocessing
-import textrecognition
 
 from nltk.corpus import movie_reviews
 from nltk.classify.scikitlearn import SklearnClassifier
@@ -17,8 +15,6 @@ def find_features(review: list, word_features: list)->dict:
         features[w] = (w in words)
 
     return features
-
-feature_presence = find_features(movie_reviews.words('neg/cv000_29416.txt'))
 
 def open_classifer():
     #Open the saved byte file with the saved classifer and load it into classifier
@@ -45,6 +41,41 @@ def standard_training():
     """
     :return:
     """
+def algo_combo(training_set: list, testing_set: list):
+    """Try all the types of classifiers on the set of data"""
+
+    MNB_classifier = SklearnClassifier(MultinomialNB())
+    MNB_classifier.train(training_set)
+    print("MNB_classifier accuracy percent:", (nltk.classify.accuracy(MNB_classifier, testing_set)) * 100)
+
+    BernoulliNB_classifier = SklearnClassifier(BernoulliNB())
+    BernoulliNB_classifier.train(training_set)
+    print("BernoulliNB_classifier accuracy percent:",
+          (nltk.classify.accuracy(BernoulliNB_classifier, testing_set)) * 100)
+
+    LogisticRegression_classifier = SklearnClassifier(LogisticRegression())
+    LogisticRegression_classifier.train(training_set)
+    print("LogisticRegression_classifier accuracy percent:",
+          (nltk.classify.accuracy(LogisticRegression_classifier, testing_set)) * 100)
+
+    SGDClassifier_classifier = SklearnClassifier(SGDClassifier())
+    SGDClassifier_classifier.train(training_set)
+    print("SGDClassifier_classifier accuracy percent:",
+          (nltk.classify.accuracy(SGDClassifier_classifier, testing_set)) * 100)
+
+    SVC_classifier = SklearnClassifier(SVC())
+    SVC_classifier.train(training_set)
+    print("SVC_classifier accuracy percent:", (nltk.classify.accuracy(SVC_classifier, testing_set)) * 100)
+
+    LinearSVC_classifier = SklearnClassifier(LinearSVC())
+    LinearSVC_classifier.train(training_set)
+    print("LinearSVC_classifier accuracy percent:", (nltk.classify.accuracy(LinearSVC_classifier, testing_set)) * 100)
+
+    NuSVC_classifier = SklearnClassifier(NuSVC())
+    NuSVC_classifier.train(training_set)
+    print("NuSVC_classifier accuracy percent:", (nltk.classify.accuracy(NuSVC_classifier, testing_set)) * 100)
+
+
 
 if __name__== "__main__":
 
@@ -66,6 +97,7 @@ if __name__== "__main__":
 
     #Distribution of 3000 most common words in reviews
     word_features = list(all_words.keys())[:3000]
+
     #(rev,category) = (review, pos/neg)
     #Creates a list of tuples where the first element is a dict of the presence of the words
     #and the second element is pos/neg.
