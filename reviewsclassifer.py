@@ -5,6 +5,8 @@ import preprocessing
 import textrecognition
 
 from nltk.corpus import movie_reviews
+from nltk.classify.scikitlearn import SklearnClassifier
+from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 
 def find_features(review: list, word_features: list)->dict:
     """Takes one review and searches for the 3000 words in word features,
